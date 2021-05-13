@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CounterService {
-    private final String url;
+    private final String url; // TODO ML: you store all of these variables twice, here and in the ParsingService, FilteringService and MappingService
     private final String[] skipTags;
     private final List<String> skipWords;
     private final int numberOfWords;

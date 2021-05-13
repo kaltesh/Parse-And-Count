@@ -1,6 +1,6 @@
 package services;
 
-import java.util.*;
+import java.util.*; // TODO ML: https://stackoverflow.com/questions/147454/why-is-using-a-wild-card-with-a-java-import-statement-bad
 import java.util.stream.Collectors;
 
 public class MappingService {
@@ -15,7 +15,7 @@ public class MappingService {
      * @param parsedHtml the parsed html as a String
      * @return the String converted to a LinkedList
      */
-    public LinkedList<String> makeAListFromString(String parsedHtml) {
+    public LinkedList<String> makeAListFromString(String parsedHtml) { // TODO ML: this can be static, please check all methods
         String[] htmlAsArray = parsedHtml.split(" ");
         List<String> htmlAsList = Arrays.asList(htmlAsArray);
         return new LinkedList<>(htmlAsList);

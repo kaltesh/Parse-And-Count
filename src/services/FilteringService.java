@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FilteringService {
     private final String[] skipTags;
-    private final List<String> skipWords;
+    private final List<String> skipWords; // TODO ML: HashSet would be more efficient to use
 
     public FilteringService(String[] skipTags, List<String> skipWords) {
         this.skipTags = skipTags;
