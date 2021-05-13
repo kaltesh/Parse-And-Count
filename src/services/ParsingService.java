@@ -5,8 +5,16 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class ParsingService {
+    private final String url;
 
-    public String parseHTML(String url) {
+    public ParsingService(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return parsed html as String
+     */
+    public String parseHTML() {
         StringBuilder theSiteAsSB = new StringBuilder();
         Scanner scanner = null;
         try {
