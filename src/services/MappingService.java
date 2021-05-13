@@ -33,8 +33,7 @@ public class MappingService {
     public static LinkedList<String> makeAListFromString(String parsedHtml) {
         String[] htmlAsArray = parsedHtml.split(" ");
         List<String> htmlAsList = Arrays.asList(htmlAsArray);
-        LOGGER.log(Level.FINE, "words collected into a list");
-
+        LOGGER.log(Level.WARNING, "words collected into a list");
         return new LinkedList<>(htmlAsList);
     }
 
