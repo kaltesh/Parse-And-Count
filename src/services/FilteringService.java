@@ -6,13 +6,16 @@ import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
 import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 
+/**
+ * Contains the methods to remove data from given strings and collections
+ */
 public class FilteringService {
     private final String[] skipTags;
-    private final List<String> skipWords; // TODO ML: HashSet would be more efficient to use
+    private final HashSet<String> skipWords;
 
-    public FilteringService(String[] skipTags, List<String> skipWords) {
+    public FilteringService(String[] skipTags, HashSet<String> skipWords) {
         this.skipTags = skipTags;
         this.skipWords = skipWords;
     }
@@ -21,7 +24,7 @@ public class FilteringService {
      * @param allWords all parsed html as String
      * @return all parsed words without some special characters as String
      */
-    public String removeSpecialCharacters(String allWords) {
+    public static String removeSpecialCharacters(String allWords) {
         String regex = "[\"@,.;:'-]";
         allWords = allWords.replaceAll(regex, " ");
         allWords = allWords.toLowerCase();
@@ -48,7 +51,7 @@ public class FilteringService {
      * @param parsedHtml the parsed html as String
      * @return the parsed html without all the attributes and tags
      */
-    public String removeTagsAndAttributes(String parsedHtml) {
+    public static String removeTagsAndAttributes(String parsedHtml) {
 //        String cleanHtml = Jsoup.clean(html, "", Whitelist.relaxed(), settings);
         parsedHtml = Jsoup.clean(parsedHtml, Whitelist.none());
         parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();

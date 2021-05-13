@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
 
+/**
+ * Contains the method for parsing given URL
+ */
 public class ParsingService {
     private final String url;
 

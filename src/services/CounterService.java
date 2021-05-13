@@ -4,33 +4,32 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class CounterService {
-    private final String url; // TODO ML: you store all of these variables twice, here and in the ParsingService, FilteringService and MappingService
-    private final String[] skipTags;
-    private final List<String> skipWords;
-    private final int numberOfWords;
 
-    public CounterService(String url, String[] skipTags, List<String> skipWords, int numberOfWords) {
-        this.url = url;
-        this.skipTags = skipTags;
-        this.skipWords = skipWords;
-        this.numberOfWords = numberOfWords;
+/**
+ * Calls the methods in their specific order to complete the task
+ */
+public class CounterService {
+
+    private final ParsingService parser;
+    private final FilteringService filter;
+    private final MappingService mapper;
+
+    public CounterService(ParsingService parsingService, FilteringService filteringService, MappingService mappingService){
+        this.parser = parsingService;
+        this.filter = filteringService;
+        this.mapper = mappingService;
     }
 
     public void getUrlsMostCommonWords() {
-        ParsingService parser = new ParsingService(url);
-        FilteringService filter = new FilteringService(skipTags, skipWords);
-        MappingService mapper = new MappingService(numberOfWords);
-
         String parsedHtml = parser.parseHTML();
-        parsedHtml = filter.removeSpecialCharacters(parsedHtml);
+        parsedHtml = FilteringService.removeSpecialCharacters(parsedHtml);
         parsedHtml = filter.removeTagsContent(parsedHtml);
-        parsedHtml = filter.removeTagsAndAttributes(parsedHtml);
-        LinkedList<String> parsedHtmlAsList = mapper.makeAListFromString(parsedHtml);
+        parsedHtml = FilteringService.removeTagsAndAttributes(parsedHtml);
+        LinkedList<String> parsedHtmlAsList = MappingService.makeAListFromString(parsedHtml);
         filter.removeUnwantedWords(parsedHtmlAsList);
-        Map<String, Long> wordcount = mapper.countTheWords(parsedHtmlAsList);
+        Map<String, Long> wordcount = MappingService.countTheWords(parsedHtmlAsList);
         List<Map.Entry<String, Long>> mostCommonWords = mapper.getMostCommonWords(wordcount);
 
-        System.out.println("The " + numberOfWords + " most frequent words: \n" + mostCommonWords);
+        System.out.println("The " + mapper.getAmountOfMostFrequentWords() + " most frequent words: \n" + mostCommonWords);
     }
 }
