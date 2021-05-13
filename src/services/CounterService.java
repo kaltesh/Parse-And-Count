@@ -3,6 +3,8 @@ package services;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -13,14 +15,15 @@ public class CounterService {
     private final ParsingService parser;
     private final FilteringService filter;
     private final MappingService mapper;
+    private final static Logger LOGGER = Logger.getGlobal();
 
-    public CounterService(ParsingService parsingService, FilteringService filteringService, MappingService mappingService){
+    public CounterService(ParsingService parsingService, FilteringService filteringService, MappingService mappingService) {
         this.parser = parsingService;
         this.filter = filteringService;
         this.mapper = mappingService;
     }
 
-    public void getUrlsMostCommonWords() {
+    public void printUrlsMostCommonWords() {
         String parsedHtml = parser.parseHTML();
         parsedHtml = FilteringService.removeSpecialCharacters(parsedHtml);
         parsedHtml = filter.removeTagsContent(parsedHtml);
@@ -29,6 +32,8 @@ public class CounterService {
         filter.removeUnwantedWords(parsedHtmlAsList);
         Map<String, Long> wordcount = MappingService.countTheWords(parsedHtmlAsList);
         List<Map.Entry<String, Long>> mostCommonWords = mapper.getMostCommonWords(wordcount);
+
+        LOGGER.log(Level.FINE, "tis done");
 
         System.out.println("The " + mapper.getAmountOfMostFrequentWords() + " most frequent words: \n" + mostCommonWords);
     }

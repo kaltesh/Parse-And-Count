@@ -5,8 +5,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
-import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Contains the methods to remove data from given strings and collections
@@ -14,6 +17,7 @@ import java.util.HashSet;
 public class FilteringService {
     private final String[] skipTags;
     private final HashSet<String> skipWords;
+    private final static Logger LOGGER = Logger.getGlobal();
 
     public FilteringService(String[] skipTags, HashSet<String> skipWords) {
         this.skipTags = skipTags;
@@ -28,6 +32,7 @@ public class FilteringService {
         String regex = "[\"@,.;:'-]";
         allWords = allWords.replaceAll(regex, " ");
         allWords = allWords.toLowerCase();
+        LOGGER.log(Level.SEVERE, "special characters removed from words");
         return allWords;
     }
 
@@ -41,9 +46,10 @@ public class FilteringService {
         for (int i = 0; i < skipTags.length; i++) {
             Elements elements = doc.select(skipTags[i]);
             elements.remove();
-            doc.normalise();
+            LOGGER.log(Level.FINEST, "Element removed");
         }
         parsedHtml = doc.toString();
+        LOGGER.log(Level.FINE, "Elements removed");
         return parsedHtml;
     }
 
@@ -52,9 +58,9 @@ public class FilteringService {
      * @return the parsed html without all the attributes and tags
      */
     public static String removeTagsAndAttributes(String parsedHtml) {
-//        String cleanHtml = Jsoup.clean(html, "", Whitelist.relaxed(), settings);
         parsedHtml = Jsoup.clean(parsedHtml, Whitelist.none());
         parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();
+        LOGGER.log(Level.FINE, "tags and attributes removed");
         return parsedHtml;
     }
 
@@ -65,7 +71,9 @@ public class FilteringService {
         for (int i = allWords.size() - 1; i >= 0; i--) {
             if (skipWords.contains(allWords.get(i))) {
                 allWords.remove(i);
+                LOGGER.log(Level.FINEST, "word removed");
             }
         }
+        LOGGER.log(Level.FINE, "all given words removed");
     }
 }
