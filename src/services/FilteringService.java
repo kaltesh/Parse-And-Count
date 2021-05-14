@@ -29,7 +29,7 @@ public class FilteringService {
      * @return all parsed words without some special characters as String
      */
     public static String removeSpecialCharacters(String allWords) {
-        String regex = "[\"@,.;:'-]";
+        String regex = "[\"@,.;:'()=&?-]";
         allWords = allWords.replaceAll(regex, " ");
         allWords = allWords.toLowerCase();
         LOGGER.log(Level.SEVERE, "special characters removed from words");
@@ -60,6 +60,7 @@ public class FilteringService {
     public static String removeTagsAndAttributes(String parsedHtml) {
         parsedHtml = Jsoup.clean(parsedHtml, Whitelist.none());
         parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();
+//        parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();
         LOGGER.log(Level.FINE, "tags and attributes removed");
         return parsedHtml;
     }

@@ -42,17 +42,16 @@ public class MappingService {
      * @return all the words and their occurrences in a HasMap
      */
     public static Map<String, Long> countTheWords(List<String> htmlWordsAsList) {
-        int i = 0;
         return htmlWordsAsList.stream()
                 .peek(word -> LOGGER.log(Level.FINEST, "a word is getting stored in hashmap"))
                 .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
-
     }
 
     /**
      * @param map all the words and their occurrences in a HasMap
      * @return List of entries containing the most frequent words and their occurrences
      */
+
     public List<Map.Entry<String, Long>> getMostCommonWords(Map<String, Long> map) {
         return map.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))

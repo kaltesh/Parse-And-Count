@@ -1,9 +1,6 @@
 package services;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
@@ -29,12 +26,29 @@ public class CounterService {
         parsedHtml = filter.removeTagsContent(parsedHtml);
         parsedHtml = FilteringService.removeTagsAndAttributes(parsedHtml);
         LinkedList<String> parsedHtmlAsList = MappingService.makeAListFromString(parsedHtml);
-        filter.removeUnwantedWords(parsedHtmlAsList);
-        Map<String, Long> wordcount = MappingService.countTheWords(parsedHtmlAsList);
-        List<Map.Entry<String, Long>> mostCommonWords = mapper.getMostCommonWords(wordcount);
+//        region
+//        filter.removeUnwantedWords(parsedHtmlAsList);
+//        Map<String, Long> wordcount = MappingService.countTheWords(parsedHtmlAsList);
+//        List<Map.Entry<String, Long>> mostCommonWords = mapper.getMostCommonWords(wordcount);
+//        mapper.getMostCommonWords(wordcount);
+//        LOGGER.log(Level.FINE, "tis done");
+//        System.out.println("The " + mapper.getAmountOfMostFrequentWords() + " most frequent words: \n" + mostCommonWords + "\n");
+//        endregion
+//        PrintingService
+        PrintingService printingService = new PrintingService(5);
+        for (int i = 0; i < parsedHtmlAsList.size(); i++) {
+            printingService.store(parsedHtmlAsList.get(i));
+        }
+        printingService.print();
+        printingService.print(printingService.getAmountOfWords());
 
-        LOGGER.log(Level.FINE, "tis done");
+//        LengthComparingService
+        LengthComparingService lengthComparingService = new LengthComparingService(5);
+        for (int i = 0; i < parsedHtmlAsList.size(); i++) {
+            lengthComparingService.store(parsedHtmlAsList.get(i));
+        }
+        lengthComparingService.print();
+        lengthComparingService.print(lengthComparingService.getAmontOfWords());
 
-        System.out.println("The " + mapper.getAmountOfMostFrequentWords() + " most frequent words: \n" + mostCommonWords);
     }
 }

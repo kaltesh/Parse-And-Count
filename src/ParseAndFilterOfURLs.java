@@ -33,6 +33,7 @@ public class ParseAndFilterOfURLs {
             e.printStackTrace();
             throw new RuntimeException("Problems with creating the log files");
         }
+
         String url = "https://www.lipsum.com/";
         String[] skipTags = new String[]{"head", "style"};
         HashSet<String> skipWords = new HashSet<>(Arrays.asList("to", "if", "of"));
