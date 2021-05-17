@@ -1,10 +1,13 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import static java.util.Map.Entry.comparingByValue;
 
 public class FrequentWordStore implements WordStore {
     private final HashMap<String, Long> wordsAndOccurrences;
@@ -40,14 +43,15 @@ public class FrequentWordStore implements WordStore {
      * @param n number of words to be printed
      */
     @Override
-    public void print(int n) { // TODO ML: could you please implement this without stream? :)
-        LinkedHashMap<String, Long> sortedMap =
-                wordsAndOccurrences.entrySet().stream()
-                        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                        .limit(n)
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
-                                (w1, w2) -> w1, LinkedHashMap::new));
-
-        System.out.println("\nThe " + n + " most frequent words :\n" + sortedMap);
+    public void print(int n) {
+        List<Map.Entry<String, Long>> wordsAndOccurwordsAndOccurrencesAsList = new ArrayList<>(wordsAndOccurrences.entrySet());
+        wordsAndOccurwordsAndOccurrencesAsList.sort(comparingByValue(Comparator.reverseOrder()));
+        Map<String, Long> mostFrequentWords = new LinkedHashMap<>();
+        for (Map.Entry<String, Long> entry : wordsAndOccurwordsAndOccurrencesAsList) {
+            if (mostFrequentWords.size() < n) {
+                mostFrequentWords.put(entry.getKey(), entry.getValue());
+            } else break;
+        }
+        System.out.println("\nThe " + n + " most frequent words: \n" + mostFrequentWords);
     }
 }

@@ -1,10 +1,10 @@
 import logger.MyLogger;
 import services.CollectingService;
 import services.FilteringService;
+import services.FrequentWordStore;
 import services.LongestWordStore;
 import services.ParsingService;
 import services.PrintingService;
-import services.FrequentWordStore;
 
 import java.io.IOException;
 import java.util.Arrays;

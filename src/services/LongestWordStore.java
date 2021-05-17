@@ -1,8 +1,8 @@
 package services;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.stream.Collectors;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class LongestWordStore implements WordStore {
     private final HashSet<String> wordsByLength;
@@ -35,13 +35,23 @@ public class LongestWordStore implements WordStore {
      *
      * @param n number of words to be printed
      */
+
     @Override
-    public void print(int n) { // TODO ML: could you please implement this without stream? :)
-        LinkedHashSet<String> sortedMap =
-                wordsByLength.stream()
-                        .sorted((w1, w2) -> w2.length() - w1.length())
-                        .limit(n)
-                        .collect(Collectors.toCollection(LinkedHashSet::new));
-        System.out.println("\n\nThe " + n + " longest \"words\": \n" + sortedMap);
+    public void print(int n) {
+        Set<String> sortedSet = new TreeSet<>((s1, s2) -> {
+            if (s1.length() < s2.length()) {
+                return 1;
+            } else
+                return -1;
+        });
+        sortedSet.addAll(wordsByLength);
+        System.out.print("\n\nThe " + n + " longest word:\n");
+        int i = 0;
+        for (String s : sortedSet) {
+            if (i < n) {
+                System.out.print(s + ", ");
+                i++;
+            } else break;
+        }
     }
 }
