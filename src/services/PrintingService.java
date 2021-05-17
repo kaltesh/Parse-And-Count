@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class PrintingService implements WordStore {
+public class PrintingService implements WordStore { // TODO ML: could you please find some better class name (without 'Service')?
     public PrintingService(int amountOfWords) {
         this.amontOfWords = amountOfWords;
         this.map = new HashMap<>();
@@ -27,9 +27,13 @@ public class PrintingService implements WordStore {
         if (!map.containsKey(word)) {
             map.put(word, 1L);
         } else {
-            Long count = map.get(word);
+            Long count = map.get(word); // TODO ML: this variable is not used!
             map.put(word, map.get(word) + 1);
         }
+        
+        // TODO ML: this is a more compact solution, and you need to get the word only once from the map, please check it :)
+//        Long count = map.get(word);
+//        map.put(word, count == null ? 1 : count+1 );
     }
 
     /**
@@ -50,7 +54,7 @@ public class PrintingService implements WordStore {
      * @param n number of words to be printed
      */
     @Override
-    public void print(int n) {
+    public void print(int n) { // TODO ML: could you please implement this without stream? :)
         LinkedHashMap<String, Long> sortedMap =
                 map.entrySet().stream()
                         .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
