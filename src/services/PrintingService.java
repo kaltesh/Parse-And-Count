@@ -2,6 +2,9 @@ package services;
 
 import java.util.LinkedList;
 
+/**
+ * calls the methods to print thr words with the selected filters
+ */
 public class PrintingService {
     private final WordStore wordStore;
     private final LinkedList<String> parsedHtmlAsList;
