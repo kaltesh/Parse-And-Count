@@ -18,5 +18,4 @@ public interface WordStore {
      */
     void print(int n);
 
-
 }
