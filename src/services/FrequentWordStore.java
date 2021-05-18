@@ -57,7 +57,7 @@ public class FrequentWordStore implements WordStore {
         List<Map.Entry<String, Long>> wordsAndOccurwordsAndOccurrencesAsList = new ArrayList<>(wordsAndOccurrences.entrySet());
         wordsAndOccurwordsAndOccurrencesAsList.sort(comparingByValue(Comparator.reverseOrder()));
         LOGGER.log(Level.FINE, "words placed in an ArrayList to be sorted");
-        Map<String, Long> mostFrequentWords = new LinkedHashMap<>();
+        Map<String, Long> mostFrequentWords = new LinkedHashMap<>(); // TODO ML: I think we need only an int index, and increment it until
         for (Map.Entry<String, Long> entry : wordsAndOccurwordsAndOccurrencesAsList) {
             if (mostFrequentWords.size() < n) {
                 LOGGER.log(Level.FINEST, "filling up list of most frequent words to be printed");

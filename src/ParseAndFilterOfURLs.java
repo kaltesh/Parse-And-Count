@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  * And soon it's going to be logging.
  */
 public class ParseAndFilterOfURLs {
-    private final static Logger LOGGER = Logger.getGlobal();
+    private final static Logger LOGGER = Logger.getGlobal(); // TODO ML: this is not used. IntelliJ doesn't inform you about this?
 
     public static void main(String[] args) {
 

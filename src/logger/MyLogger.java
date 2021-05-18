@@ -21,7 +21,7 @@ public class MyLogger {
     /**
      * Creates the text and the html files for the logs, adds the header and the tail
      */
-    static public void setup() throws IOException {
+    static public void setup() throws IOException { // TODO ML: could you please print the log to the standard output?
 
         Logger logger = Logger.getGlobal();
 

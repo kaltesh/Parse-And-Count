@@ -21,7 +21,7 @@ public class LongestWordStore implements WordStore {
      * @param word a string to count and store in a Hashmap
      */
     @Override
-    public void store(String word) {
+    public void store(String word) { // TODO ML: javadoc is not entirely relevant
         LOGGER.log(Level.FINE, "words stored in a hashset ");
         wordsByLength.add(word);
     }

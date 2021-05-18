@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class FilteringService {
     private final String[] skipTags;
     private final HashSet<String> skipWords;
-    private final static Logger LOGGER = Logger.getGlobal();
+    private final static Logger LOGGER = Logger.getGlobal(); // TODO ML: please start the class with static variables
 
     public FilteringService(String[] skipTags, HashSet<String> skipWords) {
         this.skipTags = skipTags;
@@ -60,7 +60,7 @@ public class FilteringService {
     public static String removeTagsAndAttributes(String parsedHtml) {
         parsedHtml = Jsoup.clean(parsedHtml, Whitelist.none());
         parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();
-//        parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim();
+//        parsedHtml = parsedHtml.replaceAll("\\s{2,}", " ").trim(); // TODO ML: please ddon't leave comment lines like this in the source
         LOGGER.log(Level.FINE, "tags and attributes removed");
         return parsedHtml;
     }

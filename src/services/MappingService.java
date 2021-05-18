@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 /**
  * Contains the methods for storing and mapping
  */
-public class MappingService {
+public class MappingService { // TODO ML: is javadoc relevant?
     private final static Logger LOGGER = Logger.getGlobal();
 
     /**
