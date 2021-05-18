@@ -3,7 +3,6 @@ package services;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -15,15 +14,15 @@ import static java.util.Map.Entry.comparingByValue;
  * prints the most frequent words
  */
 public class FrequentWordStore implements WordStore {
-    private final HashMap<String, Long> wordsAndOccurrences;
     private final static Logger LOGGER = Logger.getGlobal();
+    private final HashMap<String, Long> wordsAndOccurrences;
 
     public FrequentWordStore() {
         this.wordsAndOccurrences = new HashMap<>();
     }
 
     /**
-     * @param word a string to count and store in a Hashmap
+     * {@inheritDoc}
      */
     @Override
     public void store(String word) {
@@ -33,7 +32,7 @@ public class FrequentWordStore implements WordStore {
     }
 
     /**
-     * Prints out all of the words stored in the field.
+     * {@inheritDoc}
      */
     @Override
     public void print() {
@@ -44,27 +43,23 @@ public class FrequentWordStore implements WordStore {
         }
         System.out.println();
         LOGGER.log(Level.FINE, "all words and occurrence printed");
-
     }
 
     /**
-     * Prints out the first n words stored in the field.
-     *
-     * @param n number of words to be printed
+     * {@inheritDoc}
      */
     @Override
     public void print(int n) {
-        List<Map.Entry<String, Long>> wordsAndOccurwordsAndOccurrencesAsList = new ArrayList<>(wordsAndOccurrences.entrySet());
-        wordsAndOccurwordsAndOccurrencesAsList.sort(comparingByValue(Comparator.reverseOrder()));
+        List<Map.Entry<String, Long>> wordsAndOccurrencesAsList = new ArrayList<>(wordsAndOccurrences.entrySet());
+        wordsAndOccurrencesAsList.sort(comparingByValue(Comparator.reverseOrder()));
         LOGGER.log(Level.FINE, "words placed in an ArrayList to be sorted");
-        Map<String, Long> mostFrequentWords = new LinkedHashMap<>(); // TODO ML: I think we need only an int index, and increment it until
-        for (Map.Entry<String, Long> entry : wordsAndOccurwordsAndOccurrencesAsList) {
-            if (mostFrequentWords.size() < n) {
-                LOGGER.log(Level.FINEST, "filling up list of most frequent words to be printed");
-                mostFrequentWords.put(entry.getKey(), entry.getValue());
-            } else break;
+        StringBuilder message = new StringBuilder("\nThe" + n + " most frequent words: \n");
+        for (int i = 0; i < n; i++) {
+            message.append(wordsAndOccurrencesAsList.get(i)).append(", ");
+            LOGGER.log(Level.FINEST, "word appended to most frequent words message");
         }
-        System.out.println("\nThe " + n + " most frequent words: \n" + mostFrequentWords);
+        message.setLength(message.length() - 2);
+        System.out.println(message);
         LOGGER.log(Level.FINE, "most frequent words printed");
     }
 }

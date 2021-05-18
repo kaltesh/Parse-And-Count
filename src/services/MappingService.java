@@ -8,10 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-/**
- * Contains the methods for storing and mapping
- */
-public class MappingService { // TODO ML: is javadoc relevant?
+public class MappingService {
     private final static Logger LOGGER = Logger.getGlobal();
 
     /**

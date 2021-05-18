@@ -14,9 +14,6 @@ class MyHtmlFormatter extends Formatter {
 
     /**
      * {@inheritDoc}
-     *
-     * @param logRecord
-     * @return
      */
     public String format(LogRecord logRecord) {
         StringBuffer buf = new StringBuffer(1000);
@@ -54,8 +51,7 @@ class MyHtmlFormatter extends Formatter {
     }
 
     /**
-     * @param h the target handler
-     * @return the header string
+     * {@inheritDoc}
      */
     public String getHead(Handler h) {
         return "<!DOCTYPE html>\n<head>\n<style>\n"
@@ -76,8 +72,7 @@ class MyHtmlFormatter extends Formatter {
     }
 
     /**
-     * @param h the target handler
-     * @return the tail string
+     * {@inheritDoc}
      */
     public String getTail(Handler h) {
         return "</table>\n</body>\n</html>";

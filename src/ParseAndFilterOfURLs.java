@@ -10,23 +10,20 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.logging.Logger;
 
 /**
  * Instantiates the services and calls the methods to complete the following task:
- * Parses a given url, removes given words, removes given html elements, removes all tags and attributes,
+ * Parses a given url, removes given html elements, removes all tags and attributes, removes given words,
  * prints out the selected amount of most frequent words.
  * And soon it's going to be logging.
  */
 public class ParseAndFilterOfURLs {
-    private final static Logger LOGGER = Logger.getGlobal(); // TODO ML: this is not used. IntelliJ doesn't inform you about this?
-
     public static void main(String[] args) {
 
         String url = "https://www.lipsum.com/";
         String[] skipTags = new String[]{"head", "style"};
         HashSet<String> skipWords = new HashSet<>(Arrays.asList("a", "in", "to", "if", "of", "the", "and"));
-        int amountOfWords = 10;
+        int amountOfWords = 5;
 
         try {
             MyLogger.setup();

@@ -10,8 +10,8 @@ import java.util.logging.Logger;
  * Contains the method for parsing given URL
  */
 public class ParsingService {
-    private final String url;
     private final static Logger LOGGER = Logger.getGlobal();
+    private final String url;
 
     public ParsingService(String url) {
         this.url = url;

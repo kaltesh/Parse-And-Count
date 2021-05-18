@@ -5,7 +5,7 @@ import java.util.LinkedList;
 /**
  * calls the methods to print thr words with the selected filters
  */
-public class PrintingService { // TODO ML: typo in javadoc, IntelliJ doesn't show it to you?
+public class PrintingService {
     private final WordStore wordStore;
     private final LinkedList<String> parsedHtmlAsList;
     private final int amountOfWords;
