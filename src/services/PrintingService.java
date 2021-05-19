@@ -1,16 +1,16 @@
 package services;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * calls the methods to print thr words with the selected filters
  */
 public class PrintingService {
     private final WordStore wordStore;
-    private final LinkedList<String> parsedHtmlAsList;
+    private final ArrayList<String> parsedHtmlAsList;
     private final int amountOfWords;
 
-    public PrintingService(WordStore wordStore, LinkedList<String> parsedHtmlAsList, int amountOfWords) {
+    public PrintingService(WordStore wordStore, ArrayList<String> parsedHtmlAsList, int amountOfWords) {
         this.wordStore = wordStore;
         this.parsedHtmlAsList = parsedHtmlAsList;
         this.amountOfWords = amountOfWords;

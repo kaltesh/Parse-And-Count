@@ -6,7 +6,7 @@ import java.util.LinkedList;
 /**
  * Calls the methods in their specific order to parse and filter the given url
  */
-public class CollectingService {
+public class CollectingService extends Thread {
     private final ParsingService parser;
     private final FilteringService filter;
 

@@ -1,5 +1,6 @@
 package services;
 
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -47,6 +48,8 @@ public class FrequentWordStore implements WordStore {
 
     /**
      * {@inheritDoc}
+     *
+     * prints the n most frequent words
      */
     @Override
     public void print(int n) {

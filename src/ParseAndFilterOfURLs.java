@@ -1,15 +1,13 @@
 import logger.MyLogger;
-import services.CollectingService;
-import services.FilteringService;
 import services.FrequentWordStore;
 import services.LongestWordStore;
-import services.ParsingService;
+import services.ParallelParse;
 import services.PrintingService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.LinkedList;
 
 /**
  * Instantiates the services and calls the methods to complete the following task:
@@ -19,8 +17,9 @@ import java.util.LinkedList;
  */
 public class ParseAndFilterOfURLs {
     public static void main(String[] args) {
-
-        String url = "https://www.lipsum.com/";
+        String[] urls = new String[]{"https://justinjackson.ca/words.html", "https://justinjacksonsdf.ca/words.htmla",
+                "https://justinjackson.ca/words.html", "https://justinjackson.ca/words.html", "https://www.lipsum.com/",
+                "https://www.lipsum.com/", "https://www.lipsum.com/"};
         String[] skipTags = new String[]{"head", "style"};
         HashSet<String> skipWords = new HashSet<>(Arrays.asList("a", "in", "to", "if", "of", "the", "and"));
         int amountOfWords = 5;
@@ -32,14 +31,10 @@ public class ParseAndFilterOfURLs {
             throw new RuntimeException("Problems with creating the log files");
         }
 
-        ParsingService parsingService = new ParsingService(url);
-        FilteringService filteringService = new FilteringService(skipTags, skipWords);
+        ArrayList<String> wordsFilteredFromAllURLs = ParallelParse.getAllWords(urls, skipTags, skipWords);
 
-        CollectingService counter = new CollectingService(parsingService, filteringService);
-        LinkedList<String> wordsFiltered = counter.wordFilter();
-
-        PrintingService mostFrequentWords = new PrintingService(new FrequentWordStore(), wordsFiltered, amountOfWords);
-        PrintingService longestWords = new PrintingService(new LongestWordStore(), wordsFiltered, amountOfWords);
+        PrintingService mostFrequentWords = new PrintingService(new FrequentWordStore(), wordsFilteredFromAllURLs, amountOfWords);
+        PrintingService longestWords = new PrintingService(new LongestWordStore(), wordsFilteredFromAllURLs, amountOfWords);
 
         mostFrequentWords.wordPrinter();
         longestWords.wordPrinter();

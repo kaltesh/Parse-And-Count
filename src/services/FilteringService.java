@@ -33,7 +33,7 @@ public class FilteringService {
         String regex = "[\"@,.;:'()=&?-]";
         allWords = allWords.replaceAll(regex, " ");
         allWords = allWords.toLowerCase();
-        LOGGER.log(Level.SEVERE, "special characters removed from words");
+        LOGGER.log(Level.FINE, "special characters removed from words");
         return allWords;
     }
 
@@ -58,7 +58,8 @@ public class FilteringService {
         for (int i = 0; i < skipTags.length; i++) {
             Elements elements = doc.select(skipTags[i]);
             elements.remove();
-            LOGGER.log(Level.FINEST, "Element removed");
+            LOGGER.log(Level.SEVERE, "Element removed by " + Thread.currentThread().getName());
+
         }
         parsedHtml = doc.toString();
         LOGGER.log(Level.FINE, "Elements removed");
@@ -70,9 +71,9 @@ public class FilteringService {
      */
     public void removeUnwantedWords(LinkedList<String> allWords) {
         for (int i = allWords.size() - 1; i >= 0; i--) {
-            if (skipWords.contains(allWords.get(i))) {
+            if ((skipWords.contains(allWords.get(i))) || (allWords.get(i).length() <= 3)) {
                 allWords.remove(i);
-                LOGGER.log(Level.FINEST, "word removed");
+                LOGGER.log(Level.FINEST, "word removed by " + Thread.currentThread().getName());
             }
         }
         LOGGER.log(Level.FINE, "all given words removed");

@@ -29,10 +29,10 @@ public class ParsingService {
             LOGGER.log(Level.FINE, "scanner online");
             while (scanner.hasNext()) {
                 theSiteAsSB.append(scanner.next()).append(" ");
-                LOGGER.log(Level.FINEST, "new word scanned");
+                LOGGER.log(Level.FINEST, "new word parsed by: " + Thread.currentThread().getName());
             }
         } catch (IOException e) {
-            LOGGER.log(Level.FINE, "scanner failed");
+            LOGGER.log(Level.SEVERE, "scanner of "  +  Thread.currentThread().getName() +  " failed");
             e.printStackTrace();
         } finally {
             if (scanner != null) {
@@ -40,7 +40,7 @@ public class ParsingService {
                 LOGGER.log(Level.FINE, "scanner closed");
             }
         }
-        LOGGER.log(Level.SEVERE, "URL scanned");
+        LOGGER.log(Level.SEVERE, "URL scanned by: " + Thread.currentThread().getName());
         return theSiteAsSB.toString();
     }
 }
